@@ -16,6 +16,34 @@ Copy the .env.example file and rename it .env.
 
 ## Tools
 
+### Virtual Ed
+Generate audio files of Ed or other AI voices to handle pickups or other needs.
+
+```
+# Eleven Labs API Key
+ELEVEN_LABS_API_KEY=elevenlabsapikeygoeshere
+
+# Eleven Labs Voice ID
+ELEVEN_LABS_VOICE_ID=voiceidgoeshere
+
+# Virtual Ed Text File
+VIRTUAL_ED_TEXT=./files/input/virtual_ed.txt
+
+# Voice settings (see https://elevenlabs.io/docs/speech-synthesis/voice-settings)
+# Voice settings stability (between 0 and 1.0)
+VIRTUAL_ED_VOICE_STABILITY=0
+
+# Voice settings similarity boost (between 0 and 1.0)
+VIRTUAL_ED_VOICE_SIMILARITY=0.5
+
+# Voice settings style (between 0 and 1.0)
+VIRTUAL_ED_VOICE_STYLE=0
+
+# Voice settings use boost (true or false)
+VIRTUAL_ED_VOICE_BOOST=true
+
+```
+
 ### QR Codes
 
 Using a text file of URLs (one on each line), you can generate each QR code to a folder you can set. Example content of a text file might look like this:
@@ -68,7 +96,7 @@ TINYPNG_API_KEY=yourapikeygoeshere
 **WARNING: This utility overwrites ALL the image files with the compressed version!**
 
 ```
-node qr-codes.js '/path/to/folder'
+node tiny-png.js '/path/to/folder'
 ```
 
  *Tip: You can drag the folder to the terminal window to create the path to the folder rather than typing it out.*
