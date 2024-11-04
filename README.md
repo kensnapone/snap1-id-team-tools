@@ -16,6 +16,18 @@ Copy the .env.example file and rename it .env.
 
 ## Tools
 
+### Composer Panes Set
+Move panes with precision for recording screens the same every time
+
+```
+# Adjust Right Pane Pixels
+ADJUST_RIGHT_PANE=100
+
+# Adjust Left Pane Pixels
+ADJUST_LEFT_PANE=-100
+
+```
+
 ### Virtual Ed
 Generate audio files of Ed or other AI voices to handle pickups or other needs.
 
