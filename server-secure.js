@@ -16,11 +16,12 @@ app.use(express.static(directory))
 
 const httpsOptions = {
     key: fs.readFileSync(`${certFolder}${certName}.key`),
-    cert: fs.readFileSync(`${certFolder}${certName}.pem`)
+    cert: fs.readFileSync(`${certFolder}${certName}.pem`),
+    passphrase: process.env['LOCAL_PASSPHRASE'] // Add passphrase from .env
 }
 
 https.createServer(httpsOptions, app)
 const PORT = 5001;
-const port = process.env.LOCAL_SERVER_PORT || PORT
+const port = argv.p || process.env.LOCAL_SERVER_PORT || PORT
 https.createServer(httpsOptions, app).listen(port)
 console.log(`Running on ${port}`);
