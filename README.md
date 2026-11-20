@@ -28,6 +28,41 @@ ADJUST_LEFT_PANE=-100
 
 ```
 
+### Composer Setup macOS App
+
+Build a standalone, double-clickable application on a Mac after completing the
+Node.js setup above:
+
+```sh
+node build-composer-app.js
+```
+
+Open `dist/Composer Setup.app` in Finder. You can move it to Applications;
+running the built app does not require Node.js or this repository.
+
+Before running, open the intended virtual machine and Composer in Parallels
+Desktop. The app activates Parallels, runs `mac-parallels-applescript.scpt` to
+set its front window bounds to `{0, 0, 1602, 1009}`, waits briefly, and runs
+the same mouse actions as `composer-panes-set.js`.
+
+On first launch, enable Composer Setup in **System Settings > Privacy &
+Security > Accessibility**, adding the app with the **+** button if necessary,
+then reopen it. Allow control of Parallels Desktop if macOS asks for Automation
+permission. If macOS blocks an app transferred from another Mac, use **Open
+Anyway** in Privacy & Security only if you trust its source. This local build
+is ad-hoc signed, not notarized for public distribution.
+
+The build captures `ADJUST_LEFT_PANE` and `ADJUST_RIGHT_PANE` from your `.env`
+file (defaults: `100` and `-100`). Only the generated mouse actions are bundled,
+not your `.env` file or its other secrets. Rebuild after changing either source
+script or these settings; Accessibility permission may need to be granted again.
+
+Mouse positions remain absolute screen coordinates: left pane `(245, 300)` and
+right pane `(1293, 300)`. They are intentionally not offset by the Parallels
+window position. Use the same display arrangement and initial pane positions as
+the original scripts, and avoid moving the mouse while the app runs. Running
+the app again repeats the adjustments; it does not detect or reset pane positions.
+
 ### Virtual Ed
 Generate audio files of Ed or other AI voices to handle pickups or other needs.
 

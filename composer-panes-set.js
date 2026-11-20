@@ -1,4 +1,4 @@
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 require('dotenv').config({ path: __dirname + '/.env' });
 
 const INITIAL_LEFT_PANE = 245;
@@ -11,7 +11,8 @@ const LEFT_END = INITIAL_LEFT_PANE + ADJUST_LEFT_PANE;
 const RIGHT_END = INITIAL_RIGHT_PANE + ADJUST_RIGHT_PANE;
 
 // Uses macOS CoreGraphics via JXA — no native npm modules required
-const jxaScript = `
+function createPaneScript() {
+    return `
 ObjC.import('CoreGraphics');
 
 function post(type, x, y) {
@@ -35,6 +36,8 @@ function drag(fromX, fromY, toX, toY) {
     post($.kCGEventLeftMouseUp, toX, toY);
 }
 
+Application('Parallels Desktop').activate();
+
 var savedPos = $.CGEventGetLocation($.CGEventCreate($()));
 
 sleep(0.5);
@@ -57,5 +60,10 @@ sleep(0.2);
 
 post($.kCGEventMouseMoved, savedPos.x, savedPos.y);
 `;
+}
 
-execSync(`osascript -l JavaScript -e ${JSON.stringify(jxaScript)}`);
+if (require.main === module) {
+    execFileSync('osascript', ['-l', 'JavaScript', '-e', createPaneScript()]);
+}
+
+module.exports = { createPaneScript };
